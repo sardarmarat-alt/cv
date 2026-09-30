@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Marat Sardaryan – Portfolio</title>
+<style>
+:root{--bg:#f7f8fb;--card:#fff;--text:#1b2233;--muted:#5b6478;--accent:#1f4fd8;--line:#e3e7ef;
+box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#0f1420;--card:#171d2c;--text:#e8ecf5;--muted:#9aa4bb;--accent:#7ea2ff;--line:#262e42}}
+:root[data-theme="dark"]{--bg:#0f1420;--card:#171d2c;--text:#e8ecf5;--muted:#9aa4bb;--accent:#7ea2ff;--line:#262e42}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--text);font:16px/1.6 system-ui,-apple-system,"Segoe UI",Roboto,sans-serif}
+.wrap{max-width:760px;margin:0 auto;padding:40px 20px 56px}
+header h1{font-size:2.2rem;margin:0 0 4px;letter-spacing:-.02em}
+header p.role{color:var(--accent);font-weight:600;margin:0 0 14px}
+header p.lead{color:var(--muted);margin:0 0 18px;max-width:60ch}
+.btn{display:inline-block;background:var(--accent);color:#fff;padding:10px 18px;border-radius:8px;text-decoration:none;font-weight:600}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]) .btn{color:#0f1420}}
+:root[data-theme="dark"] .btn{color:#0f1420}
+section{margin-top:36px}
+h2{font-size:.85rem;text-transform:uppercase;letter-spacing:.12em;color:var(--muted);margin:0 0 12px}
+.card{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:16px 18px;margin-bottom:12px}
+.card h3{margin:0;font-size:1.05rem}
+.meta{color:var(--muted);font-size:.9rem;margin:2px 0 6px}
+.card p{margin:0}
+.tags{display:flex;flex-wrap:wrap;gap:8px;padding:0;margin:0;list-style:none}
+.tags li{background:var(--card);border:1px solid var(--line);border-radius:999px;padding:5px 13px;font-size:.92rem}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:12px}
+.bar{display:flex;gap:4px;margin-top:6px}
+.bar i{width:14px;height:6px;border-radius:3px;background:var(--line)}
+.bar i.on{background:var(--accent)}
+.skill{display:flex;justify-content:space-between;align-items:center;padding:10px 0;border-bottom:1px solid var(--line)}
+.skill:last-child{border:0}
+footer{margin-top:40px;color:var(--muted);font-size:.9rem}
+a{color:var(--accent)}
+</style>
+</head>
+<body>
+<div class="wrap">
+<header>
+<h1>Marat Sardaryan</h1>
+<p class="role">Customer Support &amp; Client Communication</p>
+<p class="lead">Business Engineering student at KU Leuven with hands-on experience in finance and accounting roles. I communicate clearly in English and Russian, solve problems methodically and stay calm under pressure.</p>
+<a class="btn" href="mailto:sardar.marat@gmail.com">Get in touch</a>
+</header>
+
+<section>
+<h2>Strengths</h2>
+<ul class="tags">
+<li>Problem solving</li><li>Teamwork</li><li>Critical thinking</li><li>Initiative</li><li>Self-motivation</li><li>Creativity</li>
+</ul>
+</section>
+
+<section>
+<h2>Experience</h2>
+<div class="card">
+<h3>Accountant Assistant · GNG Group</h3>
+<div class="meta">Yerevan · Jul – Sep 2024</div>
+<p>Supported the accounting team with day-to-day financial records and documentation.</p>
+</div>
+<div class="card">
+<h3>Financial Analyst Assistant · LUCY TOUR</h3>
+<div class="meta">Yeghegnadzor · Apr – Sep 2022</div>
+<p>Assisted with financial analysis and reporting for a travel company.</p>
+</div>
+</section>
+
+<section>
+<h2>Education</h2>
+<div class="card">
+<h3>Business Engineering · KU Leuven</h3>
+<div class="meta">Since 2023</div>
+</div>
+<div class="card">
+<h3>IB Diploma Programme · Quantum College</h3>
+<div class="meta">Graduated 2022</div>
+</div>
+</section>
+
+<section>
+<h2>Leadership &amp; Achievements</h2>
+<div class="card">
+<h3>Co-founder · Armenian Students Association</h3>
+<div class="meta">KU Leuven Brussels campus</div>
+<p>Helped set up and run a student community from scratch.</p>
+</div>
+<div class="grid">
+<div class="card"><h3>Brussels Marathon</h3><div class="meta">Completed the full distance</div></div>
+<div class="card"><h3>Kangaroo Contest</h3><div class="meta">International winner, 2013–2017</div></div>
+</div>
+</section>
+
+<section>
+<h2>Languages</h2>
+<div class="grid">
+<div class="card"><h3>English</h3><div class="meta">C2</div></div>
+<div class="card"><h3>Russian</h3><div class="meta">C2</div></div>
+<div class="card"><h3>Armenian</h3><div class="meta">Native</div></div>
+<div class="card"><h3>French</h3><div class="meta">Beginner</div></div>
+</div>
+</section>
+
+<section>
+<h2>Skills</h2>
+<div class="card">
+<div class="skill"><span>Microsoft Excel</span><span class="bar"><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i></span></div>
+<div class="skill"><span>Data analysis</span><span class="bar"><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i></i></span></div>
+<div class="skill"><span>Python</span><span class="bar"><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i></i></span></div>
+<div class="skill"><span>Google Workspace</span><span class="bar"><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i></i></span></div>
+<div class="skill"><span>R</span><span class="bar"><i class="on"></i><i class="on"></i><i class="on"></i><i></i><i></i></span></div>
+</div>
+</section>
+
+<section>
+<h2>Beyond work</h2>
+<ul class="tags">
+<li>Piano</li><li>Running</li><li>Swimming</li><li>Reading</li><li>Writing</li><li>Cooking</li><li>Travelling</li>
+</ul>
+</section>
+
+<footer>
+<p>Interested in working together? Email me at <a href="mailto:sardar.marat@gmail.com">sardar.marat@gmail.com</a>.</p>
+</footer>
+</div>
+</body>
+</html>
