@@ -175,8 +175,8 @@ var io=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isInter
 e.target.querySelectorAll('.fill').forEach(function(f){f.style.width=f.dataset.w+'%'});io.unobserve(e.target)}})},{threshold:.12});
 document.querySelectorAll('.rv').forEach(function(el){io.observe(el)});
 
-var SUPABASE_URL='PASTE_YOUR_PROJECT_URL';
-var SUPABASE_KEY='PASTE_YOUR_PUBLISHABLE_KEY';
+var SUPABASE_URL='https://jdxrdxdpdmamxrnxbpmj.supabase.co';
+var SUPABASE_KEY='sb_publishable_5YZmaQplMGV8sf92P11OOw_S5gESGem';
 document.getElementById('cform').addEventListener('submit',function(e){
 e.preventDefault();var f=e.target,st=document.getElementById('status'),btn=document.getElementById('send');
 if(f.website.value){return}
