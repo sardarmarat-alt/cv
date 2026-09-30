@@ -74,6 +74,9 @@ form input:focus,form textarea:focus{border-color:var(--accent)}
 form textarea{min-height:90px;resize:vertical}
 .hp{position:absolute;left:-9999px;opacity:0}
 #status{margin:10px 0 0;font-size:.9rem;min-height:1.2em}
+.btns{display:flex;flex-wrap:wrap;gap:10px}
+.btn.ghost{background:var(--glass2);color:var(--text);text-decoration:none;display:inline-block}
+.btn{text-decoration:none;display:inline-block}
 </style>
 </head>
 <body>
@@ -87,7 +90,7 @@ form textarea{min-height:90px;resize:vertical}
 </div>
 </nav>
 <div class="menu glass" id="menu">
-<a href="#about">About</a><a href="#experience">Experience</a><a href="#education">Education</a><a href="#skills">Skills</a><a href="#languages">Languages</a><a href="#" data-contact>Contact</a>
+<a href="#about">About</a><a href="#experience">Experience</a><a href="#education">Education</a><a href="#skills">Skills</a><a href="#languages">Languages</a><a href="Marat_Sardaryan_CV.pdf" download="Marat_Sardaryan_CV.pdf">Download CV</a><a href="#" data-contact>Contact</a>
 </div>
 
 <div class="wrap">
@@ -95,7 +98,7 @@ form textarea{min-height:90px;resize:vertical}
 <h1>Marat Sardaryan</h1>
 <p class="role">Customer Support &amp; Client Communication</p>
 <p class="lead">Business Engineering student at KU Leuven with hands-on experience in finance and accounting roles. I communicate clearly in English and Russian, solve problems methodically and stay calm under pressure.</p>
-<button class="btn" data-contact>Get in touch</button>
+<div class="btns"><button class="btn" data-contact>Get in touch</button><a class="btn ghost" href="Marat_Sardaryan_CV.pdf" download="Marat_Sardaryan_CV.pdf">Download CV ⬇</a></div>
 </header>
 
 <section class="rv"><h2>Strengths</h2>
@@ -111,7 +114,7 @@ form textarea{min-height:90px;resize:vertical}
 
 <section class="rv"><h2>Leadership &amp; Achievements</h2>
 <div class="card glass"><h3>Co-founder · Armenian Students Association</h3><div class="meta">KU Leuven Brussels campus</div><p>Helped set up and run a student community from scratch.</p></div>
-<div class="grid"><div class="card glass"><h3>Brussels Marathon</h3><div class="meta">Completed the full distance</div></div><div class="card glass"><h3>Kangaroo Contest</h3><div class="meta">International winner, 2013–2017</div></div></div></section>
+<div class="grid"><div class="card glass"><h3>Brussels Marathon</h3><div class="meta">Completed the full distance</div></div><div class="card glass"><h3>Kangaroo Contest</h3><div class="meta">Award winner, 2013–2017</div></div></div></section>
 
 <section class="rv" id="languages"><h2>Languages</h2>
 <div class="grid"><div class="card glass"><h3>English</h3><div class="meta">C2</div></div><div class="card glass"><h3>Russian</h3><div class="meta">C2</div></div><div class="card glass"><h3>Armenian</h3><div class="meta">Native</div></div><div class="card glass"><h3>French</h3><div class="meta">Beginner</div></div></div></section>
