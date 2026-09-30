@@ -5,124 +5,158 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>Marat Sardaryan – Portfolio</title>
 <style>
-:root{--bg:#f7f8fb;--card:#fff;--text:#1b2233;--muted:#5b6478;--accent:#1f4fd8;--line:#e3e7ef;
-box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
-@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#0f1420;--card:#171d2c;--text:#e8ecf5;--muted:#9aa4bb;--accent:#7ea2ff;--line:#262e42}}
-:root[data-theme="dark"]{--bg:#0f1420;--card:#171d2c;--text:#e8ecf5;--muted:#9aa4bb;--accent:#7ea2ff;--line:#262e42}
-html{scroll-padding-top:env(safe-area-inset-top,0px)}
+:root{--bg1:#dfe9ff;--bg2:#f4e9ff;--b1:#7aa2ff;--b2:#c78bff;--b3:#6fe0d0;--text:#14192b;--muted:#4c5672;--accent:#1f4fd8;--glass:rgba(255,255,255,.45);--glass2:rgba(255,255,255,.65);--edge:rgba(255,255,255,.8);--shadow:rgba(40,60,120,.18);--onacc:#fff;box-sizing:border-box;padding-bottom:env(safe-area-inset-bottom,0px)}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg1:#0a0f1e;--bg2:#1a1230;--b1:#2b4fd0;--b2:#8a3fd0;--b3:#0f8f86;--text:#eef1fa;--muted:#a3adc7;--accent:#8fb0ff;--glass:rgba(255,255,255,.08);--glass2:rgba(255,255,255,.14);--edge:rgba(255,255,255,.22);--shadow:rgba(0,0,0,.5);--onacc:#0a0f1e}}
+:root[data-theme="dark"]{--bg1:#0a0f1e;--bg2:#1a1230;--b1:#2b4fd0;--b2:#8a3fd0;--b3:#0f8f86;--text:#eef1fa;--muted:#a3adc7;--accent:#8fb0ff;--glass:rgba(255,255,255,.08);--glass2:rgba(255,255,255,.14);--edge:rgba(255,255,255,.22);--shadow:rgba(0,0,0,.5);--onacc:#0a0f1e}
 *{box-sizing:border-box}
-body{margin:0;background:var(--bg);color:var(--text);font:16px/1.6 system-ui,-apple-system,"Segoe UI",Roboto,sans-serif}
-.wrap{max-width:760px;margin:0 auto;padding:40px 20px 56px}
-header h1{font-size:2.2rem;margin:0 0 4px;letter-spacing:-.02em}
-header p.role{color:var(--accent);font-weight:600;margin:0 0 14px}
-header p.lead{color:var(--muted);margin:0 0 18px;max-width:60ch}
-.btn{display:inline-block;background:var(--accent);color:#fff;padding:10px 18px;border-radius:8px;text-decoration:none;font-weight:600}
-@media (prefers-color-scheme:dark){:root:not([data-theme="light"]) .btn{color:#0f1420}}
-:root[data-theme="dark"] .btn{color:#0f1420}
-section{margin-top:36px}
-h2{font-size:.85rem;text-transform:uppercase;letter-spacing:.12em;color:var(--muted);margin:0 0 12px}
-.card{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:16px 18px;margin-bottom:12px}
+html{scroll-behavior:smooth;scroll-padding-top:90px}
+body{margin:0;min-height:100vh;color:var(--text);background:linear-gradient(135deg,var(--bg1),var(--bg2));background-attachment:fixed;font:16px/1.6 system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;overflow-x:hidden}
+.blob{position:fixed;border-radius:50%;filter:blur(70px);opacity:.55;z-index:0;pointer-events:none;animation:float 18s ease-in-out infinite}
+.b1{width:360px;height:360px;background:var(--b1);top:-80px;left:-80px}
+.b2{width:320px;height:320px;background:var(--b2);top:40%;right:-100px;animation-delay:-6s}
+.b3{width:300px;height:300px;background:var(--b3);bottom:-80px;left:25%;animation-delay:-12s}
+@keyframes float{50%{transform:translate(30px,-40px) scale(1.08)}}
+.glass{background:var(--glass);backdrop-filter:blur(22px) saturate(180%);-webkit-backdrop-filter:blur(22px) saturate(180%);border:1px solid var(--edge);border-radius:20px;box-shadow:0 10px 30px var(--shadow),inset 0 1px 0 var(--edge),inset 0 -1px 0 rgba(255,255,255,.06)}
+.wrap{position:relative;z-index:1;max-width:780px;margin:0 auto;padding:110px 18px 60px}
+nav{position:fixed;z-index:10;top:calc(env(safe-area-inset-top,0px) + 12px);left:12px;right:12px;max-width:780px;margin:0 auto;display:flex;justify-content:space-between;align-items:center;padding:8px 10px 8px 18px;border-radius:999px}
+nav strong{letter-spacing:-.01em}
+.actions{display:flex;gap:8px}
+.icon{width:40px;height:40px;border-radius:50%;border:1px solid var(--edge);background:var(--glass2);color:var(--text);cursor:pointer;display:grid;place-items:center;font-size:1.1rem;transition:transform .2s}
+.icon:hover{transform:scale(1.08)}
+.burger span{display:block;width:16px;height:2px;background:var(--text);border-radius:2px;margin:2px 0;transition:.3s}
+.burger.open span:nth-child(1){transform:translateY(6px) rotate(45deg)}
+.burger.open span:nth-child(2){opacity:0}
+.burger.open span:nth-child(3){transform:translateY(-6px) rotate(-45deg)}
+.menu{position:fixed;z-index:9;top:calc(env(safe-area-inset-top,0px) + 70px);right:12px;width:220px;padding:10px;display:flex;flex-direction:column;opacity:0;transform:translateY(-10px) scale(.96);pointer-events:none;transition:.3s}
+.menu.open{opacity:1;transform:none;pointer-events:auto}
+.menu a{color:var(--text);text-decoration:none;padding:10px 14px;border-radius:12px}
+.menu a:hover{background:var(--glass2)}
+h1{font-size:clamp(2rem,7vw,3rem);margin:0 0 4px;letter-spacing:-.02em}
+.role{color:var(--accent);font-weight:700;margin:0 0 12px}
+.hero{padding:30px 26px}
+.hero p.lead{color:var(--muted);max-width:58ch;margin:0 0 20px}
+.btn{border:1px solid var(--edge);background:var(--accent);color:var(--onacc);padding:11px 20px;border-radius:999px;font:inherit;font-weight:600;cursor:pointer;box-shadow:0 6px 18px var(--shadow);transition:transform .2s}
+.btn:hover{transform:translateY(-2px)}
+section{margin-top:38px}
+h2{font-size:.8rem;text-transform:uppercase;letter-spacing:.14em;color:var(--muted);margin:0 0 12px 6px}
+.card{padding:16px 20px;margin-bottom:12px}
 .card h3{margin:0;font-size:1.05rem}
 .meta{color:var(--muted);font-size:.9rem;margin:2px 0 6px}
 .card p{margin:0}
 .tags{display:flex;flex-wrap:wrap;gap:8px;padding:0;margin:0;list-style:none}
-.tags li{background:var(--card);border:1px solid var(--line);border-radius:999px;padding:5px 13px;font-size:.92rem}
-.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:12px}
-.bar{display:flex;gap:4px;margin-top:6px}
-.bar i{width:14px;height:6px;border-radius:3px;background:var(--line)}
-.bar i.on{background:var(--accent)}
-.skill{display:flex;justify-content:space-between;align-items:center;padding:10px 0;border-bottom:1px solid var(--line)}
-.skill:last-child{border:0}
-footer{margin-top:40px;color:var(--muted);font-size:.9rem}
-a{color:var(--accent)}
+.tags li{padding:6px 14px;border-radius:999px;font-size:.92rem}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:12px}
+.grid .card{margin:0}
+.skill{display:flex;justify-content:space-between;align-items:center;padding:10px 0;gap:14px}
+.skill+.skill{border-top:1px solid var(--edge)}
+.track{width:140px;height:8px;border-radius:8px;background:var(--glass2);overflow:hidden;flex:none}
+.fill{height:100%;width:0;border-radius:8px;background:linear-gradient(90deg,var(--b1),var(--b2));transition:width 1.2s cubic-bezier(.2,.8,.2,1)}
+.rv{opacity:0;transform:translateY(28px);transition:opacity .8s ease,transform .8s ease}
+.rv.in{opacity:1;transform:none}
+.overlay{position:fixed;inset:0;z-index:20;display:grid;place-items:center;padding:18px;background:rgba(10,15,30,.35);backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px);opacity:0;pointer-events:none;transition:opacity .3s}
+.overlay.open{opacity:1;pointer-events:auto}
+.modal{width:100%;max-width:400px;padding:22px;transform:scale(.92) translateY(14px);transition:transform .35s cubic-bezier(.2,.9,.3,1.2)}
+.overlay.open .modal{transform:none}
+.modal h3{margin:0 0 4px;font-size:1.3rem}
+.modal .sub{color:var(--muted);margin:0 0 16px;font-size:.92rem}
+.row{display:flex;align-items:center;gap:12px;padding:12px 14px;margin-bottom:10px;border-radius:14px;background:var(--glass2);border:1px solid var(--edge);color:var(--text);text-decoration:none}
+.row .ic{font-size:1.3rem}
+.row small{display:block;color:var(--muted);font-size:.78rem}
+.row .val{flex:1;min-width:0;word-break:break-all}
+.copy{border:1px solid var(--edge);background:transparent;color:var(--accent);border-radius:999px;padding:4px 10px;font:inherit;font-size:.8rem;cursor:pointer}
+.close{float:right}
+@media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}.rv{opacity:1;transform:none}}
 </style>
 </head>
 <body>
+<div class="blob b1"></div><div class="blob b2"></div><div class="blob b3"></div>
+
+<nav class="glass">
+<strong>Marat Sardaryan</strong>
+<div class="actions">
+<button class="icon" id="theme" aria-label="Toggle light/dark mode">🌓</button>
+<button class="icon burger" id="burger" aria-label="Menu"><div><span></span><span></span><span></span></div></button>
+</div>
+</nav>
+<div class="menu glass" id="menu">
+<a href="#about">About</a><a href="#experience">Experience</a><a href="#education">Education</a><a href="#skills">Skills</a><a href="#languages">Languages</a><a href="#" data-contact>Contact</a>
+</div>
+
 <div class="wrap">
-<header>
+<header class="hero glass rv" id="about">
 <h1>Marat Sardaryan</h1>
 <p class="role">Customer Support &amp; Client Communication</p>
 <p class="lead">Business Engineering student at KU Leuven with hands-on experience in finance and accounting roles. I communicate clearly in English and Russian, solve problems methodically and stay calm under pressure.</p>
-<a class="btn" href="mailto:sardar.marat@gmail.com">Get in touch</a>
+<button class="btn" data-contact>Get in touch</button>
 </header>
 
-<section>
-<h2>Strengths</h2>
-<ul class="tags">
-<li>Problem solving</li><li>Teamwork</li><li>Critical thinking</li><li>Initiative</li><li>Self-motivation</li><li>Creativity</li>
-</ul>
-</section>
+<section class="rv"><h2>Strengths</h2>
+<ul class="tags"><li class="glass">Problem solving</li><li class="glass">Teamwork</li><li class="glass">Critical thinking</li><li class="glass">Initiative</li><li class="glass">Self-motivation</li><li class="glass">Creativity</li></ul></section>
 
-<section>
-<h2>Experience</h2>
-<div class="card">
-<h3>Accountant Assistant · GNG Group</h3>
-<div class="meta">Yerevan · Jul – Sep 2024</div>
-<p>Supported the accounting team with day-to-day financial records and documentation.</p>
-</div>
-<div class="card">
-<h3>Financial Analyst Assistant · LUCY TOUR</h3>
-<div class="meta">Yeghegnadzor · Apr – Sep 2022</div>
-<p>Assisted with financial analysis and reporting for a travel company.</p>
-</div>
-</section>
+<section class="rv" id="experience"><h2>Experience</h2>
+<div class="card glass"><h3>Accountant Assistant · GNG Group</h3><div class="meta">Yerevan · Jul – Sep 2024</div><p>Supported the accounting team with day-to-day financial records and documentation.</p></div>
+<div class="card glass"><h3>Financial Analyst Assistant · LUCY TOUR</h3><div class="meta">Yeghegnadzor · Apr – Sep 2022</div><p>Assisted with financial analysis and reporting for a travel company.</p></div></section>
 
-<section>
-<h2>Education</h2>
-<div class="card">
-<h3>Business Engineering · KU Leuven</h3>
-<div class="meta">Since 2023</div>
-</div>
-<div class="card">
-<h3>IB Diploma Programme · Quantum College</h3>
-<div class="meta">Graduated 2022</div>
-</div>
-</section>
+<section class="rv" id="education"><h2>Education</h2>
+<div class="card glass"><h3>Business Engineering · KU Leuven</h3><div class="meta">Since 2023</div></div>
+<div class="card glass"><h3>IB Diploma Programme · Quantum College</h3><div class="meta">Graduated 2022</div></div></section>
 
-<section>
-<h2>Leadership &amp; Achievements</h2>
-<div class="card">
-<h3>Co-founder · Armenian Students Association</h3>
-<div class="meta">KU Leuven Brussels campus</div>
-<p>Helped set up and run a student community from scratch.</p>
-</div>
-<div class="grid">
-<div class="card"><h3>Brussels Marathon</h3><div class="meta">Completed the full distance</div></div>
-<div class="card"><h3>Kangaroo Contest</h3><div class="meta">International winner, 2013–2017</div></div>
-</div>
-</section>
+<section class="rv"><h2>Leadership &amp; Achievements</h2>
+<div class="card glass"><h3>Co-founder · Armenian Students Association</h3><div class="meta">KU Leuven Brussels campus</div><p>Helped set up and run a student community from scratch.</p></div>
+<div class="grid"><div class="card glass"><h3>Brussels Marathon</h3><div class="meta">Completed the full distance</div></div><div class="card glass"><h3>Kangaroo Contest</h3><div class="meta">International winner, 2013–2017</div></div></div></section>
 
-<section>
-<h2>Languages</h2>
-<div class="grid">
-<div class="card"><h3>English</h3><div class="meta">C2</div></div>
-<div class="card"><h3>Russian</h3><div class="meta">C2</div></div>
-<div class="card"><h3>Armenian</h3><div class="meta">Native</div></div>
-<div class="card"><h3>French</h3><div class="meta">Beginner</div></div>
-</div>
-</section>
+<section class="rv" id="languages"><h2>Languages</h2>
+<div class="grid"><div class="card glass"><h3>English</h3><div class="meta">C2</div></div><div class="card glass"><h3>Russian</h3><div class="meta">C2</div></div><div class="card glass"><h3>Armenian</h3><div class="meta">Native</div></div><div class="card glass"><h3>French</h3><div class="meta">Beginner</div></div></div></section>
 
-<section>
-<h2>Skills</h2>
-<div class="card">
-<div class="skill"><span>Microsoft Excel</span><span class="bar"><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i></span></div>
-<div class="skill"><span>Data analysis</span><span class="bar"><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i></i></span></div>
-<div class="skill"><span>Python</span><span class="bar"><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i></i></span></div>
-<div class="skill"><span>Google Workspace</span><span class="bar"><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i></i></span></div>
-<div class="skill"><span>R</span><span class="bar"><i class="on"></i><i class="on"></i><i class="on"></i><i></i><i></i></span></div>
-</div>
-</section>
+<section class="rv" id="skills"><h2>Skills</h2>
+<div class="card glass">
+<div class="skill"><span>Microsoft Excel</span><div class="track"><div class="fill" data-w="100"></div></div></div>
+<div class="skill"><span>Data analysis</span><div class="track"><div class="fill" data-w="80"></div></div></div>
+<div class="skill"><span>Python</span><div class="track"><div class="fill" data-w="80"></div></div></div>
+<div class="skill"><span>Google Workspace</span><div class="track"><div class="fill" data-w="80"></div></div></div>
+<div class="skill"><span>R</span><div class="track"><div class="fill" data-w="60"></div></div></div>
+</div></section>
 
-<section>
-<h2>Beyond work</h2>
-<ul class="tags">
-<li>Piano</li><li>Running</li><li>Swimming</li><li>Reading</li><li>Writing</li><li>Cooking</li><li>Travelling</li>
-</ul>
-</section>
-
-<footer>
-<p>Interested in working together? Email me at <a href="mailto:sardar.marat@gmail.com">sardar.marat@gmail.com</a>.</p>
-</footer>
+<section class="rv"><h2>Beyond work</h2>
+<ul class="tags"><li class="glass">Piano</li><li class="glass">Running</li><li class="glass">Swimming</li><li class="glass">Reading</li><li class="glass">Writing</li><li class="glass">Cooking</li><li class="glass">Travelling</li></ul></section>
 </div>
+
+<div class="overlay" id="overlay">
+<div class="modal glass" role="dialog" aria-modal="true" aria-labelledby="ct">
+<button class="icon close" id="close" aria-label="Close">✕</button>
+<h3 id="ct">Let's talk</h3>
+<p class="sub">Tap a detail to open the app, or copy it.</p>
+<div class="row"><span class="ic">✉️</span><a class="val" href="mailto:sardar.marat@gmail.com?subject=Hello%20Marat" style="color:inherit;text-decoration:none"><small>Email</small>sardar.marat@gmail.com</a><button class="copy" data-copy="sardar.marat@gmail.com">Copy</button></div>
+<div class="row"><span class="ic">📞</span><a class="val" href="tel:+37495441418" style="color:inherit;text-decoration:none"><small>Phone</small>+374 95 441418</a><button class="copy" data-copy="+37495441418">Copy</button></div>
+<div class="row"><span class="ic">📍</span><span class="val"><small>Location</small>Yerevan, Armenia</span></div>
+</div>
+</div>
+
+<script>
+var root=document.documentElement;
+function setTheme(t){root.setAttribute('data-theme',t);try{localStorage.setItem('theme',t)}catch(e){}}
+try{var s=localStorage.getItem('theme');if(s)root.setAttribute('data-theme',s)}catch(e){}
+document.getElementById('theme').onclick=function(){
+var cur=root.getAttribute('data-theme')||(matchMedia('(prefers-color-scheme:dark)').matches?'dark':'light');
+setTheme(cur==='dark'?'light':'dark')};
+var burger=document.getElementById('burger'),menu=document.getElementById('menu');
+function toggleMenu(f){var o=f===undefined?!menu.classList.contains('open'):f;menu.classList.toggle('open',o);burger.classList.toggle('open',o)}
+burger.onclick=function(e){e.stopPropagation();toggleMenu()};
+menu.addEventListener('click',function(e){if(e.target.tagName==='A')toggleMenu(false)});
+document.addEventListener('click',function(e){if(!menu.contains(e.target))toggleMenu(false)});
+var ov=document.getElementById('overlay');
+function openC(){ov.classList.add('open')}function closeC(){ov.classList.remove('open')}
+document.querySelectorAll('[data-contact]').forEach(function(el){el.addEventListener('click',function(e){e.preventDefault();e.stopPropagation();toggleMenu(false);openC()})});
+document.getElementById('close').onclick=closeC;
+ov.addEventListener('click',function(e){if(e.target===ov)closeC()});
+document.addEventListener('keydown',function(e){if(e.key==='Escape'){closeC();toggleMenu(false)}});
+document.querySelectorAll('[data-copy]').forEach(function(b){b.onclick=function(){
+var v=b.getAttribute('data-copy');
+try{navigator.clipboard.writeText(v)}catch(e){}
+b.textContent='Copied!';setTimeout(function(){b.textContent='Copy'},1500)}});
+var io=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){e.target.classList.add('in');
+e.target.querySelectorAll('.fill').forEach(function(f){f.style.width=f.dataset.w+'%'});io.unobserve(e.target)}})},{threshold:.12});
+document.querySelectorAll('.rv').forEach(function(el){io.observe(el)});
+</script>
 </body>
 </html>
