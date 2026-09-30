@@ -77,6 +77,22 @@ form textarea{min-height:90px;resize:vertical}
 .btns{display:flex;flex-wrap:wrap;gap:10px}
 .btn.ghost{background:var(--glass2);color:var(--text);text-decoration:none;display:inline-block}
 .btn{text-decoration:none;display:inline-block}
+
+.chat-fab{position:fixed;z-index:15;right:16px;bottom:calc(env(safe-area-inset-bottom,0px) + 16px);width:58px;height:58px;font-size:1.5rem;background:var(--glass2);backdrop-filter:blur(22px) saturate(180%);-webkit-backdrop-filter:blur(22px) saturate(180%);box-shadow:0 10px 30px var(--shadow),inset 0 1px 0 var(--edge)}
+.chat{position:fixed;z-index:16;right:16px;bottom:calc(env(safe-area-inset-bottom,0px) + 86px);width:min(360px,calc(100vw - 32px));height:min(480px,calc(100vh - 140px));display:flex;flex-direction:column;padding:0;overflow:hidden;opacity:0;transform:translateY(16px) scale(.96);pointer-events:none;transition:.3s}
+.chat.open{opacity:1;transform:none;pointer-events:auto}
+.chat-head{padding:14px 18px;border-bottom:1px solid var(--edge);display:flex;justify-content:space-between;align-items:center}
+.chat-head small{display:block;color:var(--muted);font-size:.76rem}
+#cmsgs{flex:1;overflow-y:auto;padding:14px;display:flex;flex-direction:column;gap:8px}
+.bub{max-width:82%;padding:8px 13px;border-radius:16px;font-size:.92rem;word-wrap:break-word;white-space:pre-wrap}
+.bub.me{align-self:flex-end;background:var(--accent);color:var(--onacc)}
+.bub.them{align-self:flex-start;background:var(--glass2);border:1px solid var(--edge)}
+.chat-empty{color:var(--muted);font-size:.9rem;text-align:center;margin:auto 10px}
+#chatform{padding:12px;border-top:1px solid var(--edge)}
+#chatform input,#chatform textarea{width:100%;margin-bottom:8px;padding:9px 12px;border-radius:12px;border:1px solid var(--edge);background:var(--glass2);color:var(--text);font:inherit;outline:none}
+.chat-row{display:flex;gap:8px}.chat-row textarea{margin:0!important;resize:none;height:42px}
+.chat-row .btn{padding:0 16px}
+#cstatus{font-size:.8rem;color:var(--muted);margin:6px 0 0;min-height:1em}
 </style>
 </head>
 <body>
@@ -132,11 +148,23 @@ form textarea{min-height:90px;resize:vertical}
 <ul class="tags"><li class="glass">Piano</li><li class="glass">Running</li><li class="glass">Swimming</li><li class="glass">Reading</li><li class="glass">Writing</li><li class="glass">Cooking</li><li class="glass">Travelling</li></ul></section>
 </div>
 
+<button class="icon chat-fab" id="chatfab" aria-label="Open chat">💬</button>
+<div class="chat glass" id="chat" role="dialog" aria-label="Chat with Marat">
+<div class="chat-head"><div><strong>Chat with Marat</strong><small>I usually reply within a day</small></div><button class="icon" id="chatclose" aria-label="Close chat" style="width:34px;height:34px">✕</button></div>
+<div id="cmsgs"><div class="chat-empty" id="cempty">Hi! Write me a message and I'll answer here.</div></div>
+<form id="chatform" autocomplete="off">
+<div id="cintro"><input id="cname" placeholder="Your name" maxlength="80"><input id="cemail" type="email" placeholder="Email (optional, so I can reply if you leave)" maxlength="200"></div>
+<div class="chat-row"><textarea id="ctext" placeholder="Type a message…" maxlength="1000" required></textarea><button class="btn" type="submit" id="csend">Send</button></div>
+<p id="cstatus" role="status"></p>
+</form>
+</div>
+
 <div class="overlay" id="overlay">
 <div class="modal glass" role="dialog" aria-modal="true" aria-labelledby="ct">
 <button class="icon close" id="close" aria-label="Close">✕</button>
 <h3 id="ct">Let's talk</h3>
 <p class="sub">Tap a detail to open the app, or copy it.</p>
+<button class="btn" data-chat style="width:100%;margin-bottom:12px">💬 Chat live</button>
 <div class="row"><span class="ic">✉️</span><a class="val" href="mailto:sardar.marat@gmail.com?subject=Hello%20Marat" style="color:inherit;text-decoration:none"><small>Email</small>sardar.marat@gmail.com</a><button class="copy" data-copy="sardar.marat@gmail.com">Copy</button></div>
 <div class="row"><span class="ic">📞</span><a class="val" href="tel:+37495441418" style="color:inherit;text-decoration:none"><small>Phone</small>+374 95 441418</a><button class="copy" data-copy="+37495441418">Copy</button></div>
 <div class="row"><span class="ic">📍</span><span class="val"><small>Location</small>Yerevan, Armenia</span></div>
@@ -190,6 +218,39 @@ body:JSON.stringify({name:f.name.value.trim(),email:f.email.value.trim(),message
 .catch(function(){st.textContent='Something went wrong. Please email me directly instead.'})
 .finally(function(){btn.disabled=false});
 });
+
+(function(){
+var chat=document.getElementById('chat'),msgs=document.getElementById('cmsgs'),st=document.getElementById('cstatus'),timer=null,token=null,count=-1;
+try{token=localStorage.getItem('chat_token')}catch(e){}
+function api(fn,body){return fetch(SUPABASE_URL+'/rest/v1/rpc/'+fn,{method:'POST',headers:{'Content-Type':'application/json',apikey:SUPABASE_KEY,Authorization:'Bearer '+SUPABASE_KEY},body:JSON.stringify(body)})}
+function render(list){
+if(list.length===count)return;count=list.length;
+msgs.innerHTML='';
+if(!list.length){var e=document.createElement('div');e.className='chat-empty';e.textContent="Hi! Write me a message and I'll answer here.";msgs.appendChild(e);return}
+list.forEach(function(m){var b=document.createElement('div');b.className='bub '+(m.sender==='owner'?'them':'me');b.textContent=m.body;msgs.appendChild(b)});
+msgs.scrollTop=msgs.scrollHeight}
+function poll(){if(!token)return;api('chat_fetch',{p_token:token}).then(function(r){return r.ok?r.json():null}).then(function(l){if(l)render(l)}).catch(function(){})}
+function setOpen(o){chat.classList.toggle('open',o);clearInterval(timer);if(o){poll();timer=setInterval(poll,5000)}}
+function syncIntro(){document.getElementById('cintro').style.display=token?'none':'block'}
+syncIntro();
+document.getElementById('chatfab').onclick=function(){setOpen(!chat.classList.contains('open'))};
+document.getElementById('chatclose').onclick=function(){setOpen(false)};
+document.querySelectorAll('[data-chat]').forEach(function(el){el.addEventListener('click',function(e){e.preventDefault();e.stopPropagation();closeC();toggleMenu(false);setOpen(true)})});
+document.getElementById('ctext').addEventListener('keydown',function(e){if(e.key==='Enter'&&!e.shiftKey){e.preventDefault();document.getElementById('chatform').requestSubmit()}});
+document.getElementById('chatform').addEventListener('submit',function(e){
+e.preventDefault();var t=document.getElementById('ctext'),n=document.getElementById('cname'),em=document.getElementById('cemail'),btn=document.getElementById('csend');
+var text=t.value.trim();if(!text)return;
+if(!token&&!n.value.trim()){st.textContent='Please enter your name.';n.focus();return}
+btn.disabled=true;st.textContent='';
+api('chat_send',{p_token:token,p_name:n.value.trim(),p_email:em.value.trim(),p_body:text}).then(function(r){
+if(r.status===429){st.textContent='Please wait a moment before sending again.';return null}
+if(!r.ok){st.textContent='Could not send. Check your name and email, or email me directly.';return null}
+return r.json()}).then(function(tok){if(!tok)return;
+token=tok;try{localStorage.setItem('chat_token',tok)}catch(e){}
+t.value='';syncIntro();count=-1;poll()}).catch(function(){st.textContent='Connection problem. Please try again.'}).finally(function(){btn.disabled=false});
+});
+if(token){poll()}
+})();
 </script>
 </body>
 </html>
